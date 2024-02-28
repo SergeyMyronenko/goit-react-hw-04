@@ -1,23 +1,27 @@
-import userData from "./components/data/userData.json";
-import friends from "./components/data/friends.json";
-import transactions from "./components/data/transactions.json";
-import { Profile } from "./components/Profile/Profile";
-import { FriendList } from "./components/Friendlist/FriendList";
-import { TransactionHistory } from "./components/TransactionHistory/TransactionHistory";
+import { useState } from "react";
 import "../node_modules/modern-normalize/modern-normalize.css";
+import { ImageGallery } from "./components/ImageGallery/ImageGallery";
+// import { ImageModal } from "./components/ImageModal/ImageModal";
+// import { LoadMoreButton } from "./components/LoadMoreButton/LoadMoreButton";
+// import { Loader } from "./components/Loader/Loader";
+import { SearchBar } from "./components/SearchBar/SearchBar";
+import { fetchImages } from "./rest-api";
 
 export const App = () => {
+  const [images, setImages] = useState([]);
+
+  const handleSubmit = async (query) => {
+    const imageData = await fetchImages(query);
+    setImages(imageData);
+  };
+
   return (
     <div>
-      <Profile
-        name={userData.username}
-        tag={userData.tag}
-        location={userData.location}
-        image={userData.avatar}
-        stats={userData.stats}
-      />
-      <FriendList friends={friends} />
-      <TransactionHistory items={transactions} />
+      <SearchBar onSubmit={handleSubmit} />
+      <ImageGallery gallery={images} />
+      {/* <LoadMoreButton />
+      <Loader />
+      <ImageModal /> */}
     </div>
   );
 };
