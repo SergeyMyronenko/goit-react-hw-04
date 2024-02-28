@@ -1,0 +1,62 @@
+.profileBox {
+  padding-top: 24px;
+  width: 480px;
+  border: 2px solid #000;
+  border-radius: 16px;
+  background-color: white;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.mainImage {
+  margin: 0 auto;
+  width: 220px;
+  border-radius: 50%;
+  background-color: #242120;
+  box-shadow: 0 4px 4px #242120;
+}
+
+.nameTitle {
+  margin-top: 24px;
+  color: black;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.nicknameTitle {
+  margin-top: 24px;
+  color: grey;
+  font-size: 24px;
+}
+
+.location {
+  margin-top: 8px;
+  color: grey;
+  font-size: 24px;
+}
+
+.statsList {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(190, 189, 189);
+}
+
+.listItem {
+  padding: 16px 8px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border: 1px solid grey;
+}
+
+.listTitle {
+  color: #000;
+  font-size: 24px;
+}
+
+.listAmount {
+  color: #000;
+  font-size: 20px;
+  font-weight: 700;
+}

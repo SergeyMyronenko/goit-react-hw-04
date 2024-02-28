@@ -1,0 +1,23 @@
+.friendsImg {
+  margin: 0 auto;
+}
+
+.friendsName {
+  color: #000;
+  margin-top: 8px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.onlineInfo {
+  font-size: 20px;
+  color: #000;
+}
+
+.friendsIsOnline {
+  color: green;
+}
+
+.friendsIsOffline {
+  color: red;
+}
