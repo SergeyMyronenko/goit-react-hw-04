@@ -1,31 +1,30 @@
-import { Field, Form, Formik } from "react";
-import * as Yup from "yup";
+import { Field, Form, Formik, ErrorMessage } from "formik";
+import toast from "react-hot-toast";
 
 export const SearchBar = ({ onSubmit }) => {
-  const userSchema = Yup.object().shape({
-    query: Yup.string()
-      .min(3, "Enter min 3 symbol")
-      .max(20, "To long")
-      .required("required"),
-  });
-
   return (
     <header>
       <Formik
         initialValues={{ query: "" }}
         onSubmit={(values, actions) => {
           onSubmit(values.query);
+          if (!values.query) {
+            toast.error("Please enter a search query");
+          }
           actions.resetForm();
         }}
-        validationSchema={userSchema}
       >
         <Form>
           <Field
             name="query"
             type="text"
-            autocomplete="off"
-            autofocus
+            autoFocus
             placeholder="Search images and photos"
+          />
+          <ErrorMessage
+            name="query"
+            component="span"
+            style={{ color: "red" }}
           />
           <button type="submit">Search</button>
         </Form>
