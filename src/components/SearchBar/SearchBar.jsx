@@ -1,9 +1,11 @@
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import toast from "react-hot-toast";
 
+import css from "./SearchBar.module.css";
+
 export const SearchBar = ({ onSubmit }) => {
   return (
-    <header>
+    <header className={css.header}>
       <Formik
         initialValues={{ query: "" }}
         onSubmit={(values, actions) => {

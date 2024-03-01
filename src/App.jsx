@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import "../node_modules/modern-normalize/modern-normalize.css";
 import { ImageGallery } from "./components/ImageGallery/ImageGallery";
-// import { ImageModal } from "./components/ImageModal/ImageModal";
 import { LoadMoreButton } from "./components/LoadMoreButton/LoadMoreButton";
 import { Loader } from "./components/Loader/Loader";
 import { SearchBar } from "./components/SearchBar/SearchBar";
 import { fetchImages } from "./rest-api";
 import { Toaster } from "react-hot-toast";
 import { ErrorMessage } from "./components/ErrorMessage/ErrorMessage";
+import { ImageModal } from "./components/ImageModal/ImageModal";
+import css from "App.module.css";
 
 export const App = () => {
   const [query, setQuery] = useState("");
@@ -15,12 +16,16 @@ export const App = () => {
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    if (!query) {
+      return;
+    }
+
     const getImages = async () => {
       try {
         setLoader(true);
-        setImages([]);
         const imageData = await fetchImages(query, page);
         setImages((prevImages) => {
           return [...prevImages, ...imageData];
@@ -33,7 +38,6 @@ export const App = () => {
     };
     getImages();
   }, [query, page]);
-
   const handleSubmit = (inputQuery) => {
     setQuery(inputQuery);
     setPage(1);
@@ -44,15 +48,27 @@ export const App = () => {
     setPage(page + 1);
   };
 
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div>
       <SearchBar onSubmit={handleSubmit} />
-      {images.length > 0 && <ImageGallery gallery={images} />}
-      {loader && <Loader />}
-      {error && <ErrorMessage />}
-      {images.length > 0 && <LoadMoreButton onClick={handleLoadMore} />}
-      {/* <ImageModal /> */}
-      <Toaster position="top-right" />
+      <div>
+        {images.length > 0 && (
+          <ImageGallery gallery={images} onOpen={handleOpen} />
+        )}
+        {loader && <Loader />}
+        {error && <ErrorMessage />}
+        {images.length > 0 && <LoadMoreButton onClick={handleLoadMore} />}
+        {isOpen && <ImageModal isOpen={isOpen} isClose={handleClose} />}
+        <Toaster position="top-right" />
+      </div>
     </div>
   );
 };
