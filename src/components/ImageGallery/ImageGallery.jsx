@@ -1,12 +1,16 @@
 import { ImageCard } from "../ImageCard/ImageCard";
 import css from "./ImageGallery.module.css";
 
-export const ImageGallery = ({ gallery, onClickImage, onOpen }) => {
+export const ImageGallery = ({ gallery, onOpen }) => {
   return (
     <ul className={css.gallery}>
       {gallery.map((item) => (
-        <li key={item.id} onClick={onOpen}>
-          <ImageCard imageCard={item} openModal={onClickImage} />
+        <li
+          key={item.id}
+          onClick={() => onOpen(item)}
+          className={css.galleryItem}
+        >
+          <ImageCard imageCard={item} />
         </li>
       ))}
     </ul>

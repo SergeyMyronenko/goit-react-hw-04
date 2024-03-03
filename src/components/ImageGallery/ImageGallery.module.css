@@ -3,3 +3,6 @@
   flex-wrap: wrap;
   gap: 12px;
 }
+.galleryItem {
+  width: calc((100% - 36px) / 4);
+}

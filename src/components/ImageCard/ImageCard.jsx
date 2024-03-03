@@ -8,7 +8,6 @@ export const ImageCard = ({
     user: { last_name },
     links: { download },
   },
-  openModal,
 }) => {
   const handleDownloadClick = () => {
     window.open(download, "_blank");
@@ -16,12 +15,7 @@ export const ImageCard = ({
 
   return (
     <div>
-      <img
-        className={css.image}
-        src={small}
-        alt={description}
-        onClick={openModal}
-      />
+      <img className={css.image} src={small} alt={description} />
       <div>
         <p>Likes: {likes}</p>
         <p>Author: {last_name}</p>

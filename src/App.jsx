@@ -8,7 +8,7 @@ import { fetchImages } from "./rest-api";
 import { Toaster } from "react-hot-toast";
 import { ErrorMessage } from "./components/ErrorMessage/ErrorMessage";
 import { ImageModal } from "./components/ImageModal/ImageModal";
-import css from "App.module.css";
+import css from "./App.module.css";
 
 export const App = () => {
   const [query, setQuery] = useState("");
@@ -17,6 +17,7 @@ export const App = () => {
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
+  const [content, setContent] = useState({});
 
   useEffect(() => {
     if (!query) {
@@ -38,6 +39,8 @@ export const App = () => {
     };
     getImages();
   }, [query, page]);
+
+  console.log(content);
   const handleSubmit = (inputQuery) => {
     setQuery(inputQuery);
     setPage(1);
@@ -48,8 +51,9 @@ export const App = () => {
     setPage(page + 1);
   };
 
-  const handleOpen = () => {
+  const handleOpen = (value) => {
     setIsOpen(true);
+    setContent(value);
   };
 
   const handleClose = () => {
@@ -59,14 +63,16 @@ export const App = () => {
   return (
     <div>
       <SearchBar onSubmit={handleSubmit} />
-      <div>
+      <div className={css.main}>
         {images.length > 0 && (
           <ImageGallery gallery={images} onOpen={handleOpen} />
         )}
         {loader && <Loader />}
         {error && <ErrorMessage />}
         {images.length > 0 && <LoadMoreButton onClick={handleLoadMore} />}
-        {isOpen && <ImageModal isOpen={isOpen} isClose={handleClose} />}
+        {isOpen && (
+          <ImageModal isOpen={isOpen} onClose={handleClose} content={content} />
+        )}
         <Toaster position="top-right" />
       </div>
     </div>
