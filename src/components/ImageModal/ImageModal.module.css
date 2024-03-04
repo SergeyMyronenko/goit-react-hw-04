@@ -1,7 +1,9 @@
 .modal {
-  position: relative;
-  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: #fff;
+  overflow: auto;
 }
 
 .overlay {
@@ -13,5 +15,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #fff;
 }

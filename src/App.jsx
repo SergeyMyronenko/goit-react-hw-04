@@ -18,6 +18,7 @@ export const App = () => {
   const [page, setPage] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState({});
+  const [showBtn, setShowBtn] = useState(false);
 
   useEffect(() => {
     if (!query) {
@@ -27,10 +28,13 @@ export const App = () => {
     const getImages = async () => {
       try {
         setLoader(true);
-        const imageData = await fetchImages(query, page);
+        const { imageData, totalPages } = await fetchImages(query, page);
+
         setImages((prevImages) => {
           return [...prevImages, ...imageData];
         });
+
+        setShowBtn(totalPages !== page && imageData.length > 0);
       } catch (error) {
         setError(true);
       } finally {
@@ -40,7 +44,6 @@ export const App = () => {
     getImages();
   }, [query, page]);
 
-  console.log(content);
   const handleSubmit = (inputQuery) => {
     setQuery(inputQuery);
     setPage(1);
@@ -69,7 +72,7 @@ export const App = () => {
         )}
         {loader && <Loader />}
         {error && <ErrorMessage />}
-        {images.length > 0 && <LoadMoreButton onClick={handleLoadMore} />}
+        {showBtn && <LoadMoreButton onClick={handleLoadMore} />}
         {isOpen && (
           <ImageModal isOpen={isOpen} onClose={handleClose} content={content} />
         )}

@@ -4,5 +4,6 @@
   gap: 12px;
 }
 .galleryItem {
+  box-shadow: 0 2px 5px 0;
   width: calc((100% - 36px) / 4);
 }

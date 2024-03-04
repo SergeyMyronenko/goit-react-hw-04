@@ -13,5 +13,8 @@ export const fetchImages = async (query, page) => {
       per_page: 12,
     },
   });
-  return response.data.results;
+  return {
+    imageData: response.data.results,
+    totalPages: response.data.total_pages,
+  };
 };
