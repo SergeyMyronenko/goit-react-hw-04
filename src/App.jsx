@@ -76,9 +76,15 @@ export const App = () => {
         {loader && <Loader />}
         {error && <ErrorMessage />}
         {showBtn && <LoadMoreBtn onClick={handleLoadMore} />}
-        {isOpen && (
-          <ImageModal isOpen={isOpen} onClose={handleClose} content={content} />
-        )}
+        <Modal
+          isOpen={isOpen}
+          onRequestClose={handleClose}
+          className={css.modal}
+          overlayClassName={css.overlay}
+        >
+          <ImageModal content={content} />
+        </Modal>
+
         <Toaster position="top-right" />
       </div>
     </div>
