@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../node_modules/modern-normalize/modern-normalize.css";
 import { ImageGallery } from "./components/ImageGallery/ImageGallery";
-import { LoadMoreButton } from "./components/LoadMoreButton/LoadMoreButton";
+import { LoadMoreBtn } from "./components/LoadMoreBtn/LoadMoreBtn";
 import { Loader } from "./components/Loader/Loader";
 import { SearchBar } from "./components/SearchBar/SearchBar";
 import { fetchImages } from "./rest-api";
@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import { ErrorMessage } from "./components/ErrorMessage/ErrorMessage";
 import { ImageModal } from "./components/ImageModal/ImageModal";
 import css from "./App.module.css";
+import Modal from "react-modal";
 
 export const App = () => {
   const [query, setQuery] = useState("");
@@ -19,6 +20,8 @@ export const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState({});
   const [showBtn, setShowBtn] = useState(false);
+
+  Modal.setAppElement("#root");
 
   useEffect(() => {
     if (!query) {
@@ -72,7 +75,7 @@ export const App = () => {
         )}
         {loader && <Loader />}
         {error && <ErrorMessage />}
-        {showBtn && <LoadMoreButton onClick={handleLoadMore} />}
+        {showBtn && <LoadMoreBtn onClick={handleLoadMore} />}
         {isOpen && (
           <ImageModal isOpen={isOpen} onClose={handleClose} content={content} />
         )}
