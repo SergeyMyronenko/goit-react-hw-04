@@ -9,7 +9,6 @@ import { Toaster } from "react-hot-toast";
 import { ErrorMessage } from "./components/ErrorMessage/ErrorMessage";
 import { ImageModal } from "./components/ImageModal/ImageModal";
 import css from "./App.module.css";
-import Modal from "react-modal";
 
 export const App = () => {
   const [query, setQuery] = useState("");
@@ -20,8 +19,6 @@ export const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState({});
   const [showBtn, setShowBtn] = useState(false);
-
-  Modal.setAppElement("#root");
 
   useEffect(() => {
     if (!query) {

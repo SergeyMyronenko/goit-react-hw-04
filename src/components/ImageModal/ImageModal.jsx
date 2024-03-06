@@ -6,6 +6,8 @@ export const ImageModal = ({
   onClose,
   content: { description, urls, user, links },
 }) => {
+  Modal.setAppElement("#root");
+
   const handleDownloadClick = () => {
     window.open(links.download, "_blank");
   };
