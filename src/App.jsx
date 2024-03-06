@@ -77,9 +77,7 @@ export const App = () => {
         {error && <ErrorMessage />}
         {showBtn && <LoadMoreBtn onClick={handleLoadMore} />}
 
-        {isOpen && (
-          <ImageModal isOpen={isOpen} onClose={handleClose} content={content} />
-        )}
+        <ImageModal isOpen={isOpen} onClose={handleClose} content={content} />
 
         <Toaster position="top-right" />
       </div>
